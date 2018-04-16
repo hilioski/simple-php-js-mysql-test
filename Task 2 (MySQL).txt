@@ -1,0 +1,5 @@
+select
+    SUBSTRING_INDEX(SUBSTRING_INDEX(video_url,'//',-1), '/', 1) as host,
+    SUBSTRING_INDEX(SUBSTRING_INDEX(video_url,'/',-2),'/',1) AS path,
+    SUBSTRING_INDEX(video_url,'/',-1) as video_name
+from events

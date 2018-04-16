@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    </head>
+    <body>
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+        <script>
+            // Event binding
+            document.addEventListener('fullscreenchange', changeHandler, false);
+            document.addEventListener('webkitfullscreenchange', changeHandler, false);
+            document.addEventListener('mozfullscreenchange', changeHandler, false);
+
+            var customerName = 'customer1';
+
+            function getPageSession() {
+                return customerName + new Date().getTime() + '' + Math.floor((
+                    Math.random() * 998
+                ) + 1);
+            }
+
+            function changeHandler(e) {
+                if (document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen
+                    || document.msFullscreenElement) {
+                    console.log('enterFull');
+                    logEventInServer('inView', e.srcElement.parentElement.getAttribute('id'));
+                    return;
+                }
+            }
+
+            function getPageUrl() {
+                return window.location.href;
+            }
+
+            function logEventInServer(action, elementId) {
+                var serverURL = 'https://ourServer.com/events/logEvents.php';
+                /* continue here*/
+
+                var data = {
+                    date: new Date().getTime(), // value is in milliseconds not UNIX timestamp
+                    page_session: getPageSession(),
+                    action: action,
+                    elementId: elementId,
+                    pageUrl: getPageUrl()
+                };
+
+                $.ajax({
+                    url: serverURL,
+                    type: 'POST',
+                    data: data,
+                    success: function(response) {
+                        console.log(response); // ToDo: Handle server response
+                    }
+                });
+            }
+        </script>
+
+        <h1>Some Nice Videos</h1>
+
+        <div id="video1">
+            <iframe width="600"
+                    height="400"
+                    src="https://www.youtube.com/embed/e-ORhEE9VVg?enablejsapi=1"
+                    frameborder="0"
+                    allowfullscreen></iframe>
+        </div>
+        <div style="height:150px">some text</div>
+        <div id="video2">
+            <iframe width="600"
+                    height="400"
+                    src="https://www.youtube.com/embed/22QCGBE6oLo?enablejsapi=1"
+                    frameborder="0"
+                    allowfullscreen></iframe>
+        </div>
+        <div style="height:150px">some text</div>
+        <div id="video3">
+            <iframe width="600"
+                    height="400"
+                    src="https://www.youtube.com/embed/3tmd-ClpJxA?enablejsapi=1"
+                    frameborder="0"
+                    allowfullscreen></iframe>
+        </div>
+        <div style="height:150px">some text</div>
+        <div id="video4">
+            <iframe width="600"
+                    height="400"
+                    src="https://www.youtube.com/embed/wIft-t-MQuE?enablejsapi=1"
+                    frameborder="0"
+                    allowfullscreen></iframe>
+        </div>
+        <div style="height:150px">some text</div>
+        <div id="video5">
+            <iframe width="600"
+                    height="400"
+                    src="https://www.youtube.com/embed/nwBNBcFAFso?enablejsapi=1"
+                    frameborder="0"
+                    allowfullscreen></iframe>
+        </div>
+        <div style="height:150px">some text</div>
+
+    </body>
+</html>
