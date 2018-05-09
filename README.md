@@ -1,1 +1,1 @@
-# Simple tasks execrices using PHP, JS and MySQL
+# Simple tasks exercises using PHP, JS and MySQL
